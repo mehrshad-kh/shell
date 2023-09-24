@@ -17,14 +17,20 @@ case $# in
             if [[ ! -f ${latest_episode_name} ]]; then echo "error: specified episode does not exist" >&2; exit 1; fi
         else
             if [[ $1 = "-n" ]] || [[ $1 = "--next" ]]; then
-                current_latest_episode_number=$(readlink $PWD/latest | grep -oE "E[0-9]{2}" | cut -c 2-3)
-                latest_episode_number=$((current_latest_episode_number + 1))
-                latest_episode_name=$(readlink $PWD/latest | sed "s/$(printf "%c%02d" E ${current_latest_episode_number})/$(printf "%c%02d" E ${latest_episode_number})/")
-                if [[ ! -f ${latest_episode_name} ]]; then echo "error: next episode does not exist" >&2; exit 1; fi
+                offset=1
             else
-                echo "usage: link [ -n ]"
-                exit 1
+                if [[ $1 = "-p" ]] || [[ $1 = "--prev" ]]; then
+                    offset=-1
+                else
+                    echo "usage: link [ -n | -p ]"
+                    exit 1
+                fi
             fi
+
+            current_latest_episode_number=$(readlink $PWD/latest | grep -oE "E[0-9]{2}" | cut -c 2-3)
+            latest_episode_number=$((current_latest_episode_number + offset))
+            latest_episode_name=$(readlink $PWD/latest | sed "s/$(printf "%c%02d" E ${current_latest_episode_number})/$(printf "%c%02d" E ${latest_episode_number})/")
+            if [[ ! -f ${latest_episode_name} ]]; then echo "error: $([[ offset -eq 1 ]] && echo next || echo previous) episode does not exist" >&2; exit 1; fi
         fi
         ;;
     *)
