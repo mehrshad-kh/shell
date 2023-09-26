@@ -17,8 +17,8 @@ if [[ -f .info ]]; then
     exit 1
 fi
 
-echo "name=${name_value[2]}" >> .info
-echo "url=${url_value[2]}" >> .info
+echo "name = ${name_value[2]}" >> .info
+echo "url = ${url_value[2]}" >> .info
 echo "Initialized .info in $(pwd -P)/"
 
 exit 0

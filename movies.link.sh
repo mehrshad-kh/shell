@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-series_name="$(cat $PWD/.info | grep -E "^name" | cut -d "=" -f 2)"
+series_name="$(cat .info | grep -E "^name" | cut -d "=" -f 2 | xargs)"
 episode_name=$(ls $PWD/${series_name}* | sort | tail -n 1 | rev | cut -d "/" -f 1 | rev)
 
 case $# in
