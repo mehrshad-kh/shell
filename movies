@@ -5,49 +5,26 @@
 # -o pipefail   exit if any portion of a pipe fails
 set -euo pipefail
 
-function echo_no_repo
-{
-    echo "fatal: not a movie repository: .info" >&2
-}
-
-function info_exists
-{
-    if [ -f .info ]; then
-        echo 0
-    else
-        echo 1
-    fi
-}
-
 if [ $# -eq 0 ]; then
     echo "usage: movies continue | download | init | link | play" >&2
     exit 1
 fi
 
-sub_commands=(continue download init link play)
-
-case $1 in
-    continue)
-        shift; ${0%/*}/movies.continue.sh "$@"
-        ;;
-    download)
-        if ! [ $(info_exists) -eq 0 ]; then
-            echo_no_repo
-            exit 1
-        else
-            shift; ${0%/*}/movies.download.sh "$@"
+if [[ $1 = "init" ]]; then
+    shift; ${0%/*}/movies.init.sh "$@"
+else
+    subcommands=(continue download link play)
+    for subcommand in ${subcommands[@]}; do
+        if [[ $1 == ${subcommand} ]]; then
+            if [[ ! -f .info ]]; then
+                echo "fatal: not a movie repository: .info" >&2
+                exit 1
+            else
+                shift; ${0%/*}/movies.${subcommand}.sh "$@"
+                break
+            fi
         fi
-        ;;
-    init)
-        shift; ${0%/*}/movies.init.sh "$@"
-        ;;
-    link)
-        shift; ${0%/*}/movies.link.sh "$@"
-        ;;
-    play)
-        shift; ${0%/*}/movies.play.sh "$@"
-        ;;
-    *)
-        echo "error: $1: not implemented" >&2
-        ;;
-esac
+    done
+fi
+
+exit 0

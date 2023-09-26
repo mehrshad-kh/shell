@@ -19,4 +19,4 @@ else
     new_episode_link="$(echo ${first_episode_link} | rev | cut -d "/" -f 2- | rev)/${new_episode_filename}"
 fi
 
-curl -L -O ${new_episode_link}
+curl -L -g -O --retry-all-errors --retry-max-time 120 ${new_episode_link}
