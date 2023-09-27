@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-# -e    exit the script if any command fails
+# -e    exit the script in case any command fails
 # -u    exit in case of previously undefined variables being used
 # -o pipefail   exit if any portion of a pipe fails
 set -euo pipefail
