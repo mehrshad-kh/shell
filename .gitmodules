@@ -1,0 +1,3 @@
+[submodule "movies.dir"]
+	path = movies.dir
+	url = https://github.com/mehrshad-kh/movies.git
