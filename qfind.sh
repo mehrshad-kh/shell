@@ -28,9 +28,6 @@ for homepage in ${homepages[@]}; do
         grep -E "Quantum" | \
         sed -E -e "s/^[^>]*//" -e "s/>//"  -e "s/>//" -e "s/<.*//"))
 
-    # Remove empty elements (zsh).
-    courses=($courses)
-
     # Sort courses.
     # Requires `IFS=$'\n'`.
     sorted_courses=($(sort <<< ${courses[@]}))
