@@ -2,6 +2,8 @@
 # Generate a GIF
 # From: https://superuser.com/a/556031/1756780
 
+set -euo pipefail
+
 zmodload zsh/zutil
 zparseopts t:=duration || exit 1
 
