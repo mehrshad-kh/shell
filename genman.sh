@@ -7,4 +7,11 @@ if [[ $# -ne 1 ]]; then
     exit 1
 fi
 
+if ! [[ $1 =~ \.md$ ]]; then
+    >&2 echo "error: input file is not markdown"
+    exit 1
+fi
+
 pandoc --standalone --to man $1 -o ${1%\.*}
+
+exit 0
