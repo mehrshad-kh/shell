@@ -2,8 +2,8 @@
 
 set -euo pipefail
 
-if [[ $# -ne 1 ]]; then
-    >&2 echo "usage: genman.sh file"
+if [[ $# -ne 2 ]]; then
+    >&2 echo "usage: genman.sh file output_directory"
     exit 1
 fi
 
@@ -12,6 +12,10 @@ if ! [[ $1 =~ \.md$ ]]; then
     exit 1
 fi
 
-pandoc --standalone --to man $1 -o ${1%\.*}
+file_path=$1
+out_dir=$2
+base_name=$(basename $file_path)
+out_file=$out_dir/${base_name%\.*}
+pandoc --standalone --to man $file_path -o $out_file
 
 exit 0
