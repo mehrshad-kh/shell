@@ -1,14 +1,14 @@
 #!/bin/zsh
 
 # vilen.sh
-# Given a URL pointing to a video file as its argument,
+# Given a filename or URL pointing to a video file as its argument,
 # it prints the length of the video.
 
 set -eu
 
 if [[ $# -eq 0 ]]; then
     >&2 echo "vilen: illegal use"
-    >&2 echo "usage: vilen [file ...]"
+    >&2 echo "usage: vilen [file / URL ...]"
     exit 1
 fi
 

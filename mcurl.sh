@@ -13,7 +13,8 @@ fi
 
 url=$1
 
-resolved_link=$(curl -L --head -w '%{url_effective}' $url 2> /dev/null \
+# Resolve the link to get final filename.
+resolved_url=$(curl -L --head -w '%{url_effective}' $url 2> /dev/null \
     | tail -n 1)
 
 # -L, --location: Follow the request onto the last location.
@@ -21,6 +22,6 @@ resolved_link=$(curl -L --head -w '%{url_effective}' $url 2> /dev/null \
 # -f, --fail: Fail silently.
 alias curl='curl -L -O -C - -f  --retry-all-errors --retry-max-time 120'
 
-curl $resolved_link
+curl $resolved_url
 
 exit 0
