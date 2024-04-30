@@ -1,5 +1,7 @@
 #!/bin/zsh
 
+# Modify text files created on Windows to match the Unix environment.
+
 set -euo pipefail
 
 usage="usage: dedosify [file]"
