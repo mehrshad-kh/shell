@@ -16,15 +16,18 @@ excluded_file="do.sh"
 # missing the intended file.
 files=(${files[@]/$excluded_file})
 
-cp $files $user_bin
+# Copy files to user bin.
+rsync $files $user_bin
 
-cp -R movies.dir $user_bin
+# Get scripts in movies.dir.
+files=($(ls movies.dir/*.sh))
+# Copy files to user bin, preserving their path.
+rsync -R $files $user_bin
 
 # If `movies` symbolic link has not been created in user bin,
 # create it.
 if [[ ! -h $user_bin/movies ]]; then
-  cd $user_bin
-  ln -fs movies.dir/movies.sh movies
+  ln -fs movies.dir/movies.sh $user_bin/movies
 fi
 
 exit 0
