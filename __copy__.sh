@@ -11,7 +11,7 @@ user_bin="$HOME/bin"
 # which are all scripts.
 files=($(ls *.sh))
 # Exclude do.sh from files.
-excluded_file="do.sh"
+excluded_file="__copy__.sh"
 # Replace files with the new version 
 # missing the intended file.
 files=(${files[@]/$excluded_file})
