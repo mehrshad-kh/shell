@@ -30,13 +30,13 @@ consult man pages in docs/, available in both Markdown and man page.
 Chronograph (aka stopwatch)
 
 + compile\_tex.sh:
-Create PDF from TeX source and open the resulting file.
+Create PDF from TeX source and open the result
 
 + dedosify.sh (missing manual):
-Convert text files from DOS (or Windows) to the UNIX world.
+Convert text files from DOS (or Windows) to the UNIX world
 
 + gengif.sh: (missing manual):
-Create a GIF from a video.
+Create a GIF from a video
 
 + genman.sh:
 Generate man page from Markdown via pandoc
