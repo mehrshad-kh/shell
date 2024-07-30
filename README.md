@@ -6,7 +6,7 @@ hence use on a daily basis. All scripts use `zsh` and are intended
 to be used on macOS.
 
 ## Explanation
-The repository contains the following scrips:
+The repository contains the following scripts:
 + chrono.sh
 + compile\_tex.sh
 + dedosify.sh
@@ -23,16 +23,40 @@ The repository contains the following scrips:
 + vilen.sh
 
 ## Details
+A brief explanation of each script follows. For more information,
+consult man pages in docs/, available in both Markdown and man page.
+
 + chrono.sh:
 Chronograph (aka stopwatch)
 
 + compile\_tex.sh:
 Create PDF from TeX source and open the resulting file.
 
-+ dedosify.sh:
++ dedosify.sh (missing manual):
 Convert text files from DOS (or Windows) to the UNIX world.
 
-+ gengif.sh
++ gengif.sh: (missing manual):
 Create a GIF from a video.
+
++ genman.sh:
+Generate man page from Markdown via pandoc
+
++ gentest.sh (missing manual):
+
++ makehere.sh (missing manual):
+
++ mcurl.sh (missing manual):
+
++ movies.dir.sh (missing manual):
+
++ qfind.sh (missing manual):
+
++ test.sh (missing manual):
+
++ tman.sh (missing manual):
+
++ trash.sh (missing manual):
+
++ vilen.sh (missing manual):
 
 

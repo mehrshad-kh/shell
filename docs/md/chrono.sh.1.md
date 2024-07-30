@@ -12,3 +12,6 @@
 # DESCRIPTION
 **chrono.sh** starts a chronograph with HH:MM:SS format. It uses standard
 UNIX tools. Stop the chronograph with Ctrl+C.
+
+# HISTORY
+Started in Jul 2024.
