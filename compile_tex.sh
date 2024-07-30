@@ -2,5 +2,9 @@
 
 set -euo pipefail
 
-pdflatex main.tex
-open main.pdf
+src='main.tex'
+tex='pdflatex'
+
+$tex $src
+# Replace trailing pattern of .* with .pdf.
+open ${src/%.*/.pdf}
