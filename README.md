@@ -24,7 +24,7 @@ The repository contains the following scripts:
 
 ## Details
 A brief explanation of each script follows. For more information,
-consult man pages in docs/, available in both Markdown and man page.
+consult man pages in [docs/](docs), available in both Markdown and man page.
 
 + chrono.sh:
 Chronograph (aka stopwatch)
