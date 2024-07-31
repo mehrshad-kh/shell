@@ -20,7 +20,8 @@ resolved_url=$(curl -L --head -w '%{url_effective}' $url 2> /dev/null \
 # -L, --location: Follow the request onto the last location.
 # -O, --remote-name: Write output to a local file named like the remote file we get.
 # -f, --fail: Fail silently.
-alias curl='curl -L -O -C - -f  --retry-all-errors --retry-max-time 120'
+# Use caffeinate -i to prevent system sleep. macOS only.
+alias curl='caffeinate -i curl -L -O -C - -f  --retry-all-errors --retry-max-time 120'
 
 curl $resolved_url
 
