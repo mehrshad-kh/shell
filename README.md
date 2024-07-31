@@ -32,16 +32,17 @@ Chronograph (aka stopwatch)
 + compile\_tex.sh:
 Create PDF from TeX source and open the result
 
-+ dedosify.sh (missing manual):
-Convert text files from DOS (or Windows) to the UNIX world
++ dedosify.sh:
+Convert Windows (DOS) text file to UNIX
 
-+ gengif.sh: (missing manual):
-Create a GIF from a video
++ gengif.sh:
+Generate GIF from video
 
 + genman.sh:
 Generate man page from Markdown via pandoc
 
-+ gentest.sh (missing manual):
++ gentest.sh:
+Generate test cases for Quera
 
 + makehere.sh (missing manual):
 

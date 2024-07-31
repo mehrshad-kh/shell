@@ -2,10 +2,17 @@
 
 set -euo pipefail
 
+usage="usage: genman.sh file... output_directory"
+
+if [[ $# -eq 1 && $1 =~ (-h|--help) ]]; then
+  >&2 echo $usage
+  exit 1
+fi
+
 # If there are less than two positional arguments,
 if [[ $# -lt 2 ]]; then
   # Print usage and exit on error.
-  >&2 echo "usage: genman.sh file... output_directory"
+  >&2 echo $usage
   exit 1
 fi
 

@@ -4,7 +4,7 @@
 # Download files and videos using curl.
 # This script merely makes use of sensible options of curl.
 
-set -euo pipefail
+set -uo pipefail
 
 if [[ $# -ne 1 ]]; then
     >&2 echo "usage: mcurl [URL]"
@@ -24,5 +24,10 @@ resolved_url=$(curl -L --head -w '%{url_effective}' $url 2> /dev/null \
 alias curl='caffeinate -i curl -L -O -C - -f  --retry-all-errors --retry-max-time 120'
 
 curl $resolved_url
+
+if [[ $? -ne 0 ]]; then
+  say error
+  curl $resolved_url
+fi
 
 exit 0

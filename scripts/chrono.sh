@@ -1,5 +1,9 @@
 #!/bin/zsh
 
+set -euo pipefail
+
+usage="usage: chrono.sh"
+
 function chronograph()
 {
   start=$(date +%s)
@@ -11,4 +15,11 @@ function chronograph()
   done
 }
 
+if [[ $# -eq 1 && $1 =~ (-h|--help) ]]; then
+  >&2 echo $usage
+  exit 1
+fi
+
 chronograph
+
+exit 0
