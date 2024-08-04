@@ -18,6 +18,7 @@ for file in ${files[@]}; do
   ln -fs $(readlink -f $file) $user_bin/$(basename $file)
 done
 
+# Create a link to the movies directory.
 ln -fs $(readlink -f $(readlink movies)) $user_bin/movies
 
 exit 0
