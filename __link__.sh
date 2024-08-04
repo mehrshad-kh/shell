@@ -4,6 +4,8 @@ set -euo pipefail
 
 user_bin=$HOME/bin
 
+cd scripts
+
 # Get all scripts as an array.
 files=($(ls *.sh))
 
