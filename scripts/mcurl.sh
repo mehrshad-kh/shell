@@ -25,9 +25,8 @@ alias curl='caffeinate -i curl -L -O -C - -f  --retry-all-errors --retry-max-tim
 
 curl $resolved_url
 
-if [[ $? -ne 0 ]]; then
-  say error
-  curl $resolved_url
-fi
+# In case curl returns with error, 
+# download again until finished.
+while [[ $? -ne 0 ]]; do curl $resolved_url; done
 
 exit 0
