@@ -1,5 +1,9 @@
 #!/bin/zsh
 
+# ######
+# Create symbolic links in ~/bin to files in scripts/
+# ######
+
 set -euo pipefail
 
 user_bin=$HOME/bin
