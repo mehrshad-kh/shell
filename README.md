@@ -32,7 +32,7 @@ Chronograph (aka stopwatch)
 + compile\_tex.sh:
 Create PDF from TeX source and open the result
 
-+ create\_man.sh (missing manual): 
++ crman.sh (missing manual): 
 
 + dedosify.sh:
 Convert Windows (DOS) text file to UNIX
