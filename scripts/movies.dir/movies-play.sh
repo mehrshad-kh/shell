@@ -18,7 +18,7 @@ fi
 
 if [[ $# -eq 0 ]]; then
     episode_filename=${$(readlink ${latest})#../}
-    echo "playing ${episode_filename}..."
+    echo "Playing ${episode_filename}..."
     eval "ffplay ${latest} ${ffplay_options}"
 elif [[ ${#seek_value[@]} -eq 0 ]]; then
     >&2 echo "usage: movies play [ -s | --seek ] <seconds>"

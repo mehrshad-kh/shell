@@ -6,8 +6,13 @@
 
 set -uo pipefail
 
+usage="usage: mcurl <url>"
+
+# If there is other than one
+# positional parameter,
 if [[ $# -ne 1 ]]; then
-    >&2 echo "usage: mcurl [URL]"
+    # Yell at user.
+    >&2 echo $usage
     exit 1
 fi
 
@@ -25,8 +30,15 @@ alias curl='caffeinate -i curl -L -O -C - -f  --retry-all-errors --retry-max-tim
 
 curl $resolved_url
 
-# In case curl returns with error, 
-# download again until finished.
-while [[ $? -ne 0 ]]; do curl $resolved_url; done
+# For four more times,
+for ((i = 0; i < 4; i++)); do
+  # Initiate the download if it hasn't been
+  # finished yet.
+  if [[ $? -ne 0 ]]; then curl $resolved_url; fi
+done
+
+# If the download hasn't finished yet,
+# say the following words.
+if [[ $? -ne 0 ]]; then say 'download error'; fi
 
 exit 0

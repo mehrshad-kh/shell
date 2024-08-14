@@ -1,15 +1,33 @@
 #!/bin/zsh
 
-set -euo pipefail
+set -uo pipefail
 
-zmodload zsh/zutil
-# Either flag must be used, but not both.
-# Currently, both options may be used as well, which is not the intended usage.
-zparseopts {n,-next}=next_flag {c,-current}=current_flag || exit 1
+usage="usage: movies download [-n | --next], [-c | --current]"
+
+# If there is less than one positional parameter,
+if [[ $# -ne 1 ]]; then
+  # Exit.
+  >&2 echo $usage
+  exit 1
+fi
+
+# If [-n | --next] is given,
+if [[ $1 == '-n' || $1 == '--next' ]]; then
+  # Set next_flag to 1.
+  next_flag=1
+# If [-c | --current ] is given,
+elif [[ $1 == '-c' || $1 == '--current' ]]; then
+  # Set continue_flag to 1.
+  continue_flag=1
+# Otherwise,
+else
+  # Print usage and exit.
+  >&2 echo $usage
+  exit 1
+fi
 
 latest=".movies/latest"
 info=".movies/info"
-usage="usage: movies download [-n | --next], [-c | --current]"
 
 new_episode_filename=""
 new_episode_link=""
@@ -43,6 +61,8 @@ function download_next
   # If latest does not exist,
   # the first episode is to be downloaded.
   if ! [[ -h ${latest} ]]; then
+    # Set is_first to true.
+    is_first=1
     # Get new episode link from info.
     new_episode_link="$(cat ${info} \
       | grep -E "^url" \
@@ -56,6 +76,8 @@ function download_next
       | cut -d "/" -f 1 \
       | rev)"
   else
+    # Set is_first to false.
+    is_first=0
     # In case latest exists,
     # Read last episode filename from latest.
     last_episode_filename="$(readlink ${latest})"
@@ -106,10 +128,10 @@ function download_next
   fi
 }
 
-if [[ "${#next_flag}" == 1 ]]; then
+if [[ ${next_flag} == 1 ]]; then
   download_next
   verb="begins"
-elif [[ "${#current_flag}" == 1 ]]; then
+elif [[ ${#current_flag} == 1 ]]; then
   download_current
   verb="continues"
 fi
@@ -118,12 +140,16 @@ fi
 touch ${new_episode_filename}
 movies link --next
 
+# Resolve the link to get final filename.
+resolved_url=$(curl -L --head -w '%{url_effective}' \
+  "${new_episode_link}" 2> /dev/null | tail -n 1)
+
 # Download the episode.
 echo "Download ${verb} for: ${new_episode_filename}"
 caffeinate -i curl -C - -L -O -f \
   --retry-all-errors \
   --retry-max-time 30 \
-  "${new_episode_link}"
+  "${resolved_url}"
 
 # If curl finishes with error,
 if [[ $? -ne 0 ]]; then
@@ -132,5 +158,7 @@ if [[ $? -ne 0 ]]; then
   movies link --prev
   exit 1
 fi
+
+if [[ is_first -eq 1 ]]; then movies link; fi
 
 exit 0

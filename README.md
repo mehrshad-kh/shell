@@ -32,6 +32,8 @@ Chronograph (aka stopwatch)
 + compile\_tex.sh:
 Create PDF from TeX source and open the result
 
++ create\_man.sh (missing manual): 
+
 + dedosify.sh:
 Convert Windows (DOS) text file to UNIX
 
@@ -48,7 +50,7 @@ Generate test cases for Quera
 
 + mcurl.sh (missing manual):
 
-+ movies.dir.sh (missing manual):
++ movies.dir (missing manual):
 
 + qfind.sh (missing manual):
 
