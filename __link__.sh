@@ -1,14 +1,14 @@
 #!/bin/zsh
 
 # ######
-# Create symbolic links in ~/bin to files in scripts/
+# Create symbolic links in ~/bin to files in src/
 # ######
 
 set -euo pipefail
 
 user_bin=$HOME/bin
 
-cd scripts
+cd src
 
 # Get all scripts as an array.
 files=($(ls *.sh))
