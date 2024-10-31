@@ -2,7 +2,7 @@
 
 set -uo pipefail
 
-usage="usage: movies download [-n | --next], [-c | --current]"
+usage="usage: movies download [next | current]"
 
 # If there is less than one positional parameter,
 if [[ $# -ne 1 ]]; then
@@ -11,14 +11,16 @@ if [[ $# -ne 1 ]]; then
   exit 1
 fi
 
-# If [-n | --next] is given,
-if [[ $1 == '-n' || $1 == '--next' ]]; then
+# If next is given,
+if [[ $1 == 'next' ]]; then
   # Set next_flag to 1.
   next_flag=1
-# If [-c | --current ] is given,
-elif [[ $1 == '-c' || $1 == '--current' ]]; then
-  # Set continue_flag to 1.
-  continue_flag=1
+  current_flag=0
+# If current is given,
+elif [[ $1 == 'current' ]]; then
+  # Set current_flag to 1.
+  current_flag=1
+  next_flag=0
 # Otherwise,
 else
   # Print usage and exit.
